@@ -1,0 +1,208 @@
+.sheet-nba
+  input(type='hidden' name='attr_edit' value='false')
+
+  h1='Night\'s Black Agents'
+  .sheet-edit-container
+    input(name="attr_edit" type="checkbox" value="true")
+    label='Edit mode'
+
+  .sheet-dossier
+    .sheet-traitgroup
+      label.sheet-trait='Agent Name'
+      input.sheet-edit-show(name="attr_character_name" type="text")
+      span.sheet-edit-hide(name="attr_character_name")
+    .sheet-traitgroup.span-2
+      label.sheet-trait.sheet-life='Health'
+      .sheet-hns-cont
+        input.sheet-health(type="hidden" name=`attr_health_pool` value=setDefault('health'))
+        input.sheet-health-max(type="hidden" name=`attr_health` value=setDefault('health'))
+        - let i = -11;
+        while i <= 18
+          button(class=`hns sheet-sel-${i} ${gtClass(i)}` type="action" name=`act_health_pool_${i}`)=i++
+    .sheet-traitgroup.span-2
+      label.sheet-trait.sheet-stab='Stability'
+      .sheet-hns-cont
+        input.sheet-stability(type="hidden" name=`attr_stability_pool` value=setDefault('stability'))
+        input.sheet-health-max(type="hidden" name=`attr_stability` value=setDefault('stability'))
+        - let m = -11;
+        while m <= 18
+          button(class=`hns sheet-sel-${m} ${gtClass(m)}` type="action" name=`act_stability_pool_${m}`)=m++
+    .sheet-traitgroup
+      label.sheet-trait='Background'
+      input.sheet-edit-show(name="attr_background" type="text")
+      span.sheet-edit-hide(name="attr_background")
+    .sheet-traitgroup
+      label.sheet-trait='MOS'
+      select.sheet-edit-show(name="attr_mos")
+        each ability in generalAbilites
+          option(value=`${ability}`)=readable(ability)
+      span.sheet-edit-hide.sheet-ability.sheet-mos(name="attr_mos")    
+    .sheet-traitgroup
+      label.sheet-trait='Drive'
+      input.sheet-edit-show(name="attr_drive" type="text")
+      span.sheet-edit-hide(name="attr_drive")
+    .sheet-traitgroup
+      label.sheet-trait='Sources of Stability'
+      div='Symbol: '
+        input.sheet-edit-show(name="attr_symbol" type="text")
+        span.sheet-edit-hide(name="attr_symbol")
+      div='Solace: '
+        input.sheet-edit-show(name="attr_solace" type="text")
+        span.sheet-edit-hide(name="attr_solace")
+      div='Safety: '
+        input.sheet-edit-show(name="attr_safety" type="text")
+        span.sheet-edit-hide(name="attr_safety")
+
+  label.sheet-trait='General Abilities'
+  .sheet-general-abilities
+    each ability in generalAbilites
+      .sheet-ability-name
+        button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba} {{points=\@{${ability}_roll}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}_roll}]]}}`)=readable(ability)
+        span='+'
+        input.sheet-roll-pool(type="hidden" name=`attr_${ability}_pool` value="0")
+        select.sheet-roll-modifier(name=`attr_${ability}_roll`)
+          - let n = 0;
+          while n <= generalAbilityPoints
+            option(class=gtClass(n) value=`${n}`)=n++
+      .sheet-general-ability-group
+        .sheet-attr
+          input.sheet-edit-show(name=`attr_${ability}` type="number" value=setDefault(ability) min="0")
+        .sheet-dots
+          input.sheet-dot(type="hidden" name=`attr_${ability}_pool` value=setDefault(ability))
+          input.sheet-dot-max(type="hidden" name=`attr_${ability}` value=setDefault(ability))
+          - let i = 1;
+          while i <= generalAbilityPoints
+            button(class=`dot ${gtClass(i)}` type="action" name=`act_${ability}_pool_${i}`)
+              span.sheet-checked
+              - i++;
+  .sheet-dossier
+    .col
+      label.sheet-trait='Academic Abilities'
+      .sheet-investigative
+        each ability in academicAbilites
+          .sheet-investigative-ability=readable(ability)
+          .sheet-group
+            .sheet-attr
+              input.sheet-edit-show(name=`attr_${ability}` type="number" value="0" max="3" min="0")
+            .sheet-dots.sheet-edit-hide
+              input.sheet-dot(type="hidden" name=`attr_${ability}_pool` value=value=setDefault(ability))
+              input.sheet-dot-max(type="hidden" name=`attr_${ability}` value=value=setDefault(ability))
+              - let i = 1;
+              while i <= investigativeAbilityPoints
+                button(class=`dot ${gtClass(i)}` type="action" name=`act_${ability}_pool_${i}`)
+                  span.sheet-checked
+                  - i++;
+    .col
+      label.sheet-trait='Interpersonal Abilities'
+      .sheet-investigative
+        each ability in interpersonalAbilities
+          .sheet-investigative-ability=readable(ability)
+          .sheet-group
+            .sheet-attr
+              input.sheet-edit-show(name=`attr_${ability}` type="number" value="0" max="3" min="0")
+            .sheet-dots.sheet-edit-hide
+              input.sheet-dot(type="hidden" name=`attr_${ability}_pool` value=value=setDefault(ability))
+              input.sheet-dot-max(type="hidden" name=`attr_${ability}` value=value=setDefault(ability))
+              - let i = 1;
+              while i <= investigativeAbilityPoints
+                button(class=`dot ${gtClass(i)}` type="action" name=`act_${ability}_pool_${i}`)
+                  span.sheet-checked
+                  - i++;
+    .col
+      label.sheet-trait='Technical Abilities'
+      .sheet-investigative
+        each ability in technicalAbilities
+          .sheet-investigative-ability=readable(ability)
+          .sheet-group
+            .sheet-attr
+              input.sheet-edit-show(name=`attr_${ability}` type="number" value="0" max="3" min="0")
+            .sheet-dots.sheet-edit-hide
+              input.sheet-dot(type="hidden" name=`attr_${ability}_pool` value=setDefault(ability))
+              input.sheet-dot-max(type="hidden" name=`attr_${ability}` value=setDefault(ability))
+              - let i = 1;
+              while i <= investigativeAbilityPoints
+                button(class=`dot ${gtClass(i)}` type="action" name=`act_${ability}_pool_${i}`)
+                  span.sheet-checked
+                  - i++;
+
+  .sheet-dossier
+    .sheet-traitgroup
+      label.sheet-trait='Covers'
+      textarea.sheet-edit-show(name="attr_covers" type="text")
+      span.sheet-edit-hide(name="attr_covers")
+    .sheet-traitgroup
+      label.sheet-trait='Network Contacts'
+      textarea.sheet-edit-show(name="attr_contacts" type="text")
+      span.sheet-edit-hide(name="attr_contacts")
+    .sheet-traitgroup
+      label.sheet-trait='Trust'
+      fieldset.repeating_trust
+        input.sheet-edit-show.sheet-trust-agent(type='text' name='attr_trustagent' placeholder="Agent")
+        input.sheet-edit-show.sheet-trust-level(type='number' name='attr_trustlevel' placeholder="Points" value="0" max="5" min="0")
+        
+        .sheet-trust.sheet-edit-hide
+          .sheet-attr
+            span.sheet-edit-hide(name="attr_trustagent")
+          .sheet-dots.sheet-edit-hide
+            input.sheet-dot(type="hidden" name='attr_trustlevelpool' value="3")
+            input.sheet-dot-max(type="hidden" name='attr_trustlevel' value="0")
+            - let j = 1;
+            while j <= 5
+              button(class=`dot ${gtClass(j)}` type="action" name=`act_trustlevelpool-${j}`)
+                span.sheet-checked
+                - j++;
+      
+    .sheet-traitgroup
+      label.sheet-trait='Weapons Training'
+      fieldset.repeating_weaponstraining
+        input.sheet-edit-show.sheet-repeating(type='text' name='attr_weaponstraining')
+        span.sheet-edit-hide(name="attr_weaponstraining")
+    .sheet-traitgroup
+      label.sheet-trait='Tactical Benefits'
+      fieldset.repeating_tacticalbenefits
+        textarea.sheet-edit-show(name="attr_tacticalbenefits" type="text")
+        span.sheet-edit-hide(name="attr_tacticalbenefits")
+    .sheet-traitgroup
+      label.sheet-trait='Special Equipment'
+      fieldset.repeating_specialequipment
+        input.sheet-edit-show.sheet-repeating(type='text' name='attr_specialequipment')
+        span.sheet-edit-hide(name="attr_specialequipment")
+    .sheet-traitgroup
+      label.sheet-trait='Cherries'
+      fieldset.repeating_cherries
+        textarea.sheet-edit-show(name="attr_cherries" type="text")
+        span.sheet-edit-hide(name="attr_cherries")
+    .sheet-traitgroup
+      label.sheet-trait='Weapons'
+      fieldset.repeating_weapons
+        input.sheet-edit-show.sheet-trust-agent(type='text' name='attr_weapon' placeholder="Weapon")
+        input.sheet-edit-show.sheet-trust-level(type='number' name='attr_damage' placeholder="Damage")
+        span.sheet-edit-hide(name="attr_weapon")
+        span.sheet-edit-hide.sheet-pull-right(name="attr_damage")
+    .sheet-traitgroup
+      label.sheet-trait='Armor'
+      select.sheet-edit-show(name="attr_armor_type")
+        each armor in armors
+          option(value=`${armor.name}`)=armor.name
+      div='Armor: '
+        span.sheet-edit-hide(name="attr_armor_type")
+      div.sheet-resistances='Resistances:'
+      div
+        span='Bullets: '
+          span.sheet-edit-hide.sheet-pull-right(name="attr_armor_bullets")
+      div
+        span=' Melee: '
+          span.sheet-edit-hide.sheet-pull-right(name="attr_armor_melee")
+      div
+        span=' Explosives: '
+          span.sheet-edit-hide.sheet-pull-right(name="attr_armor_explosives")
+    .sheet-traitgroup
+      label.sheet-trait='Familiar cities'
+      fieldset.repeating_familiarcity
+        input.sheet-edit-show.sheet-repeating(type='text' name='attr_familiarcity')
+        span.sheet-edit-hide(name="attr_familiarcity")
+    .sheet-traitgroup
+      label.sheet-trait='Languages'
+      fieldset.repeating_languages
+        input.sheet-edit-show.sheet-repeating(type='text' name='attr_language')
+        span.sheet-edit-hide(name="attr_language")

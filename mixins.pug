@@ -1,0 +1,2 @@
+mixin rollButton(name)
+  button.blank-roll-button(name=`roll_${buttonName(name)}` type='roll' value!=`&{template:nba} {{name=${name}}} {{result=[[1d6 + @{${name}_roll}]]}}`)

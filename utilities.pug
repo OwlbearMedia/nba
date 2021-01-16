@@ -1,0 +1,39 @@
+-
+  function gtClass(val) {
+    let cn = '';
+    for (let i = val; i > 0; i--) {
+      cn += `gt-${i - 1} `;
+    }
+    return cn.trim();
+  }
+-
+  function readable(ability) {
+    ability = ability.replace(/_/gi, ' ');
+    return ability.charAt(0).toUpperCase() + ability.slice(1);
+  }
+-
+  function setDefault(ability) {
+    let score;
+    
+    switch (ability) {
+      case 'health':
+      case 'stability':
+        score = 4;
+        break;
+      case 'cover':
+        score = 10;
+        break;
+      case 'network':
+        score = 15;
+        break;
+      case 'streetwise':
+      case 'tradecraft':
+        score = 1;
+        break;
+      default:
+        score = 0;
+      }
+
+    return score;
+  }
+  

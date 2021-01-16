@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:wght@300&display=swap');
+
+button[type=roll].sheet-blank-roll-button::before { content: ''; }
+
+h1 {
+  margin-bottom: 21px;
+  font-family: 'Contrail One';
+}
+
+.sheet-nba {
+  position: relative;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 16px;
+  background: url('https://www.toptal.com/designers/subtlepatterns/patterns/lightpaperfibers.png');
+  box-shadow: 1px 3px 10px black;
+  padding: 28px;
+}
+
+.sheet-edit-container {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 130px;
+}
+
+.sheet-edit-container input {
+  float: left;
+  margin: 3px 6px 0 0;
+}
+
+.repcontainer .sheet-repeating {
+  width: 100%;
+}
+
+.repcontainer.editmode .sheet-repeating {
+  width: calc(100% - 28px);
+  margin-left: 28px; 
+}
+
+.repcontainer.editmode textarea {
+  height: 17px;
+  margin-left: 28px;
+  width: calc(100% - 42px);
+}
+
+.sheet-ability {
+  text-transform: capitalize;
+}
+
+.sheet-resistances {
+  margin-top: 8px;
+  text-decoration: underline;
+}
+
+.charsheet .sheet-nba input.sheet-trust-agent {
+  width: 70%;
+}
+
+.charsheet .sheet-nba input.sheet-trust-level {
+  width: 30%;
+}
+
+.sheet-pull-right {
+  float: right;
+}
+
+.sheet-dossier {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 21px;
+  /* row-gap: 14px; */
+  margin-bottom: 14px;
+}
+.sheet-dossier .sheet-span-2 {
+  grid-row: span 2;
+}
+
+.sheet-general-abilities button[type=roll].sheet-blank-roll-button {
+  background: transparent;
+  box-shadow: none;
+  font-size: 14px;
+  min-width: 145px;
+  padding: 4px 6px;
+}
+
+.sheet-trait {
+  position: relative;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 8px;
+  background-color: transparent;
+  text-align: center;
+  box-shadow: inset 0px 0px 0px 4px #000;
+  border-radius: 4px;
+  width: 228px;
+}
+
+.sheet-trait.sheet-life {
+  color: #FF354A;
+  box-shadow: inset 0px 0px 0px 4px #FF354A;
+}
+
+.sheet-trait.sheet-stab {
+  color: mediumblue;
+  box-shadow: inset 0px 0px 0px 4px mediumblue;
+}
+
+.sheet-trait:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("http://i.imgur.com/5O74VI6.jpg");
+  mix-blend-mode: lighten;
+}
+
+button.sheet-dot:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("http://i.imgur.com/5O74VI6.jpg");
+  mix-blend-mode: lighten;
+  background-position-x: right;
+}
+
+.sheet-traitgroup {
+  margin-bottom: 16px;
+}
+
+.sheet-nba textarea {
+  padding: 5px 7px;
+  width: calc(100% - 16px);
+  height: 75px;
+}
+
+.charsheet .sheet-nba input[name="attr_edit"][value="0"] ~ * .sheet-edit-show,
+.charsheet .sheet-nba input[name="attr_edit"][value="true"] ~ * .sheet-edit-hide,
+.charsheet .sheet-nba input[name="attr_edit"][value="0"] ~ * .repcontrol {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  left: -10000px;
+}
+
+.sheet-general-abilities {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  margin-bottom: 21px;
+}
+
+.sheet-roll-modifier {
+  background: transparent;
+  width: 50px;
+}
+
+.sheet-attr {
+  float: left;
+  margin-right: 5px;
+}
+
+.sheet-investigative {
+  display: grid;
+  grid-template-columns: 165px 1fr;
+}
+
+.sheet-investigative .sheet-attr {
+  float: right;
+}
+
+.sheet-attr-display {
+  display: inline-block;
+  margin-right: 2px;
+  margin-top: 5px;
+  width: 18px;
+}
+
+.sheet-investigative-ability {
+  margin-top: 6px;
+  border-bottom: 1px solid gainsboro
+}
+
+.sheet-group {
+  border-bottom: 1px solid gainsboro;
+  padding-top: 4px;
+}
+
+.sheet-trust {
+  clear: both;
+}
+
+.sheet-group .sheet-dots,
+.sheet-trust .sheet-dots {
+  float: right;
+}
+
+.sheet-dots {
+  display:flex;
+  height: 28px;
+  padding-top: 4px;
+}
+
+/* Configure the button styling. This example makes it look like a radio. */
+button.sheet-dot {
+  padding: 0;
+  border: solid 3px #FF354A;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2px;
+  position: relative;
+  box-shadow: 1px 1px 4px grey;
+  z-index: 1;
+}
+
+button.sheet-dot > .sheet-checked {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FF354A;
+}
+
+/* Hide the "checked" section of the radio if the hidden attribute value is greater than the button value */
+input.sheet-dot[value="0"] ~ button.sheet-dot > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="1"] ~ button.sheet-gt-1 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="2"] ~ button.sheet-gt-2 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="3"] ~ button.sheet-gt-3 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="4"] ~ button.sheet-gt-4 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="5"] ~ button.sheet-gt-5 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="6"] ~ button.sheet-gt-6 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="7"] ~ button.sheet-gt-7 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="8"] ~ button.sheet-gt-8 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="9"] ~ button.sheet-gt-9 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="10"] ~ button.sheet-gt-10 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="11"] ~ button.sheet-gt-11 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="12"] ~ button.sheet-gt-12 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="13"] ~ button.sheet-gt-13 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="14"] ~ button.sheet-gt-14 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="15"] ~ button.sheet-gt-15 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="16"] ~ button.sheet-gt-16 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="17"] ~ button.sheet-gt-17 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="18"] ~ button.sheet-gt-18 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="19"] ~ button.sheet-gt-19 > .sheet-checked {
+  display: none;
+}
+input.sheet-dot[value="20"] ~ button.sheet-gt-20 > .sheet-checked {
+  display: none;
+}
+
+/* Hide dots over player max */
+input.sheet-dot-max[value="0"] ~ button.sheet-dot {
+  display: none;
+}
+input.sheet-dot-max[value="1"] ~ button.sheet-gt-1 {
+  display: none;
+}
+input.sheet-dot-max[value="2"] ~ button.sheet-gt-2 {
+  display: none;
+}
+input.sheet-dot-max[value="3"] ~ button.sheet-gt-3 {
+  display: none;
+}
+input.sheet-dot-max[value="4"] ~ button.sheet-gt-4 {
+  display: none;
+}
+input.sheet-dot-max[value="5"] ~ button.sheet-gt-5 {
+  display: none;
+}
+input.sheet-dot-max[value="6"] ~ button.sheet-gt-6 {
+  display: none;
+}
+input.sheet-dot-max[value="7"] ~ button.sheet-gt-7 {
+  display: none;
+}
+input.sheet-dot-max[value="8"] ~ button.sheet-gt-8 {
+  display: none;
+}
+input.sheet-dot-max[value="9"] ~ button.sheet-gt-9 {
+  display: none;
+}
+input.sheet-dot-max[value="10"] ~ button.sheet-gt-10 {
+  display: none;
+}
+input.sheet-dot-max[value="11"] ~ button.sheet-gt-11 {
+  display: none;
+}
+input.sheet-dot-max[value="12"] ~ button.sheet-gt-12 {
+  display: none;
+}
+input.sheet-dot-max[value="13"] ~ button.sheet-gt-13 {
+  display: none;
+}
+input.sheet-dot-max[value="14"] ~ button.sheet-gt-14 {
+  display: none;
+}
+input.sheet-dot-max[value="15"] ~ button.sheet-gt-15 {
+  display: none;
+}
+input.sheet-dot-max[value="16"] ~ button.sheet-gt-16 {
+  display: none;
+}
+input.sheet-dot-max[value="17"] ~ button.sheet-gt-17 {
+  display: none;
+}
+input.sheet-dot-max[value="18"] ~ button.sheet-gt-18 {
+  display: none;
+}
+input.sheet-dot-max[value="19"] ~ button.sheet-gt-19 {
+  display: none;
+}
+input.sheet-dot-max[value="20"] ~ button.sheet-gt-20 {
+  display: none;
+}
+
+/* Points pool */
+input.sheet-roll-pool[value="0"] ~ select option.sheet-gt-0 {
+  display: none;
+}
+input.sheet-roll-pool[value="1"] ~ select option.sheet-gt-1 {
+  display: none;
+}
+input.sheet-roll-pool[value="2"] ~ select option.sheet-gt-2 {
+  display: none;
+}
+input.sheet-roll-pool[value="3"] ~ select option.sheet-gt-3 {
+  display: none;
+}
+input.sheet-roll-pool[value="4"] ~ select option.sheet-gt-4 {
+  display: none;
+}
+input.sheet-roll-pool[value="5"] ~ select option.sheet-gt-5 {
+  display: none;
+}
+input.sheet-roll-pool[value="6"] ~ select option.sheet-gt-6 {
+  display: none;
+}
+input.sheet-roll-pool[value="7"] ~ select option.sheet-gt-7 {
+  display: none;
+}
+input.sheet-roll-pool[value="8"] ~ select option.sheet-gt-8 {
+  display: none;
+}
+input.sheet-roll-pool[value="9"] ~ select option.sheet-gt-9 {
+  display: none;
+}
+input.sheet-roll-pool[value="10"] ~ select option.sheet-gt-10 {
+  display: none;
+}
+input.sheet-roll-pool[value="11"] ~ select option.sheet-gt-11 {
+  display: none;
+}
+input.sheet-roll-pool[value="12"] ~ select option.sheet-gt-12 {
+  display: none;
+}
+input.sheet-roll-pool[value="13"] ~ select option.sheet-gt-13 {
+  display: none;
+}
+input.sheet-roll-pool[value="14"] ~ select option.sheet-gt-14 {
+  display: none;
+}
+input.sheet-roll-pool[value="15"] ~ select option.sheet-gt-15 {
+  display: none;
+}
+input.sheet-roll-pool[value="16"] ~ select option.sheet-gt-16 {
+  display: none;
+}
+input.sheet-roll-pool[value="17"] ~ select option.sheet-gt-17 {
+  display: none;
+}
+input.sheet-roll-pool[value="18"] ~ select option.sheet-gt-18 {
+  display: none;
+}
+input.sheet-roll-pool[value="19"] ~ select option.sheet-gt-19 {
+  display: none;
+}
+input.sheet-roll-pool[value="20"] ~ select option.sheet-gt-20 {
+  display: none;
+}
+
+.sheet-hns-cont {
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px;
+}
+
+.sheet-hns {
+  background: transparent;
+  border: 3px solid transparent;
+}
+
+button.sheet-sel-0,
+button.sheet-sel--1,
+button.sheet-sel--2,
+button.sheet-sel--3,
+button.sheet-sel--4,
+button.sheet-sel--5 {
+  background: rgb(255,255,0,0.3);
+}
+
+button.sheet-sel--6,
+button.sheet-sel--7,
+button.sheet-sel--8,
+button.sheet-sel--9,
+button.sheet-sel--10,
+button.sheet-sel--11 {
+  background: rgb(255, 53, 74, 0.3);
+}
+
+input.sheet-health[value="-11"] ~ button.sheet-sel--11 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-10"] ~ button.sheet-sel--10 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-9"] ~ button.sheet-sel--9 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-8"] ~ button.sheet-sel--8 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-7"] ~ button.sheet-sel--7 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-6"] ~ button.sheet-sel--6 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-5"] ~ button.sheet-sel--5 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-4"] ~ button.sheet-sel--4 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-3"] ~ button.sheet-sel--3 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-2"] ~ button.sheet-sel--2 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="-1"] ~ button.sheet-sel--1 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="0"] ~ button.sheet-sel-0 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="1"] ~ button.sheet-sel-1 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="2"] ~ button.sheet-sel-2 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="3"] ~ button.sheet-sel-3 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="4"] ~ button.sheet-sel-4 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="5"] ~ button.sheet-sel-5 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="6"] ~ button.sheet-sel-6 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="7"] ~ button.sheet-sel-7 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="8"] ~ button.sheet-sel-8 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="9"] ~ button.sheet-sel-9 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="10"] ~ button.sheet-sel-10 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="11"] ~ button.sheet-sel-11 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="12"] ~ button.sheet-sel-12 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="13"] ~ button.sheet-sel-13 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="14"] ~ button.sheet-sel-14 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="15"] ~ button.sheet-sel-15 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="16"] ~ button.sheet-sel-16 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="17"] ~ button.sheet-sel-17 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="18"] ~ button.sheet-sel-18 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="19"] ~ button.sheet-sel-19 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+input.sheet-health[value="20"] ~ button.sheet-sel-20 {
+  border: 3px solid #FF354A;
+  border-radius: 4px;
+}
+
+input.sheet-stability[value="-11"] ~ button.sheet-sel--11 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-10"] ~ button.sheet-sel--10 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-9"] ~ button.sheet-sel--9 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-8"] ~ button.sheet-sel--8 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-7"] ~ button.sheet-sel--7 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-6"] ~ button.sheet-sel--6 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-5"] ~ button.sheet-sel--5 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-4"] ~ button.sheet-sel--4 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-3"] ~ button.sheet-sel--3 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-2"] ~ button.sheet-sel--2 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="-1"] ~ button.sheet-sel--1 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="0"] ~ button.sheet-sel-0 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="1"] ~ button.sheet-sel-1 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="2"] ~ button.sheet-sel-2 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="3"] ~ button.sheet-sel-3 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="4"] ~ button.sheet-sel-4 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="5"] ~ button.sheet-sel-5 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="6"] ~ button.sheet-sel-6 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="7"] ~ button.sheet-sel-7 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="8"] ~ button.sheet-sel-8 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="9"] ~ button.sheet-sel-9 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="10"] ~ button.sheet-sel-10 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="11"] ~ button.sheet-sel-11 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="12"] ~ button.sheet-sel-12 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="13"] ~ button.sheet-sel-13 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="14"] ~ button.sheet-sel-14 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="15"] ~ button.sheet-sel-15 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="16"] ~ button.sheet-sel-16 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="17"] ~ button.sheet-sel-17 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="18"] ~ button.sheet-sel-18 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="19"] ~ button.sheet-sel-19 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+input.sheet-stability[value="20"] ~ button.sheet-sel-20 {
+  border: 3px solid mediumblue;
+  border-radius: 4px;
+}
+
+/* Hide dots over player max */
+input.sheet-health-max[value="0"] ~ button.sheet-dot {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="1"] ~ button.sheet-gt-1 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="2"] ~ button.sheet-gt-2 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="3"] ~ button.sheet-gt-3 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="4"] ~ button.sheet-gt-4 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="5"] ~ button.sheet-gt-5 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="6"] ~ button.sheet-gt-6 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="7"] ~ button.sheet-gt-7 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="8"] ~ button.sheet-gt-8 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="9"] ~ button.sheet-gt-9 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="10"] ~ button.sheet-gt-10 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="11"] ~ button.sheet-gt-11 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="12"] ~ button.sheet-gt-12 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="13"] ~ button.sheet-gt-13 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="14"] ~ button.sheet-gt-14 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="15"] ~ button.sheet-gt-15 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="16"] ~ button.sheet-gt-16 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="17"] ~ button.sheet-gt-17 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="18"] ~ button.sheet-gt-18 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="19"] ~ button.sheet-gt-19 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+input.sheet-health-max[value="20"] ~ button.sheet-gt-20 {
+  background: rgb(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.sheet-rolltemplate-nba .sheet-template-container {
+  border: 1px solid black;
+}
+
+.sheet-rolltemplate-nba .sheet-template-header {
+  padding: 8px;
+  border-bottom: 1px solid black;
+  font-family: 'Contrail One';
+  font-size: 20px;
+  background: floralwhite;
+}
+
+.sheet-rolltemplate-nba .sheet-template-body {
+  background: floralwhite;
+  padding: 8px;
+}
+
+.sheet-rolltemplate-nba .sheet-template-row {
+  font-size: 16px;
+  padding-bottom: 8px;
+}
+
+.sheet-rolltemplate-nba .sheet-template-points {
+  color: darkgrey;
+  font-size: 12px;
+}
+
+.sheet-rolltemplate-nba .inlinerollresult {
+  background: floralwhite;
+  border: none;
+}
