@@ -84,7 +84,7 @@
               button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-weapon} {{points=\@{${ability}_roll}}} {{weapon=@{${ability.replace(/\_/gi, '-')}-weapon}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}_roll}]]}} {{damage=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-damage}]]}}`)
                 span(name=`attr_${ability.replace(/\_/gi, '-')}-weapon`)
               span='+'
-              input.sheet-roll-pool(type="hidden" name=`attr_${ability}_pool`)
+              input.sheet-roll-pool(type="hidden" name=`attr_${ability.replace(/\_/gi, '-')}-pool`)
               select.sheet-roll-modifier(name=`attr_${ability}_roll`)
                 - let x = 0;
                 while x <= generalAbilityPoints
