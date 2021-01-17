@@ -138,6 +138,10 @@ button.sheet-dot:after {
   height: 75px;
 }
 
+.sheet-mos {
+  display: inline-block;
+}
+
 .charsheet .sheet-nba input[name="attr_edit"][value="0"] ~ * .sheet-edit-show,
 .charsheet .sheet-nba input[name="attr_edit"][value="true"] ~ * .sheet-edit-hide,
 .charsheet .sheet-nba input[name="attr_edit"][value="0"] ~ * .repcontrol {
@@ -798,11 +802,31 @@ input.sheet-health-max[value="20"] ~ button.sheet-gt-20 {
   cursor: default;
 }
 
-.sheet-rolltemplate-nba .sheet-template-container {
+.sheet-traitgroup-weapons {
+  grid-column: span 2;
+}
+
+.sheet-traitgroup-weapons .repitem {
+  background: whitesmoke;
+  padding: 10px 10px 4px;
+  margin: 0 12px;
+}
+
+.sheet-traitgroup-weapons .repitem:last-child {
+  margin-bottom: 8px;
+}
+
+.charsheet .sheet-traitgroup-weapons .repitem:last-child {
+  margin-bottom: 8px;
+}
+
+.sheet-rolltemplate-nba .sheet-template-container,
+.sheet-rolltemplate-nba-weapon .sheet-template-container {
   border: 1px solid black;
 }
 
-.sheet-rolltemplate-nba .sheet-template-header {
+.sheet-rolltemplate-nba .sheet-template-header,
+.sheet-rolltemplate-nba-weapon .sheet-template-header {
   padding: 8px;
   border-bottom: 1px solid black;
   font-family: 'Contrail One';
@@ -810,22 +834,27 @@ input.sheet-health-max[value="20"] ~ button.sheet-gt-20 {
   background: floralwhite;
 }
 
-.sheet-rolltemplate-nba .sheet-template-body {
+.sheet-rolltemplate-nba .sheet-template-body,
+.sheet-rolltemplate-nba-weapon .sheet-template-body {
   background: floralwhite;
   padding: 8px;
 }
 
-.sheet-rolltemplate-nba .sheet-template-row {
+.sheet-rolltemplate-nba .sheet-template-row,
+.sheet-rolltemplate-nba-weapon .sheet-template-row {
   font-size: 16px;
   padding-bottom: 8px;
 }
 
-.sheet-rolltemplate-nba .sheet-template-points {
+.sheet-rolltemplate-nba .sheet-template-points,
+.sheet-rolltemplate-nba-weapon .sheet-template-points {
   color: darkgrey;
   font-size: 12px;
 }
 
-.sheet-rolltemplate-nba .inlinerollresult {
+.sheet-rolltemplate-nba .inlinerollresult,
+.sheet-rolltemplate-nba-weapon .inlinerollresult {
   background: floralwhite;
   border: none;
 }
+

@@ -6,11 +6,13 @@
     }
     return cn.trim();
   }
+
 -
   function readable(ability) {
     ability = ability.replace(/_/gi, ' ');
     return ability.charAt(0).toUpperCase() + ability.slice(1);
   }
+
 -
   function setDefault(ability) {
     let score;
@@ -36,4 +38,3 @@
 
     return score;
   }
-  

@@ -36,7 +36,7 @@
       select.sheet-edit-show(name="attr_mos")
         each ability in generalAbilites
           option(value=`${ability}`)=readable(ability)
-      span.sheet-edit-hide.sheet-ability.sheet-mos(name="attr_mos")    
+      span.sheet-edit-hide.sheet-ability.sheet-mos(name="attr_mos")
     .sheet-traitgroup
       label.sheet-trait='Drive'
       input.sheet-edit-show(name="attr_drive" type="text")
@@ -59,7 +59,7 @@
       .sheet-ability-name
         button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba} {{points=\@{${ability}_roll}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}_roll}]]}}`)=readable(ability)
         span='+'
-        input.sheet-roll-pool(type="hidden" name=`attr_${ability}_pool` value="0")
+        input.sheet-roll-pool(type="hidden" id=`attr_${ability}_pool` name=`attr_${ability}_pool` value="0")
         select.sheet-roll-modifier(name=`attr_${ability}_roll`)
           - let n = 0;
           while n <= generalAbilityPoints
@@ -75,6 +75,21 @@
             button(class=`dot ${gtClass(i)}` type="action" name=`act_${ability}_pool_${i}`)
               span.sheet-checked
               - i++;
+      if (ability === 'shooting' || ability === 'weapons' || ability === 'hand_to_hand')
+        .sheet-traitgroup-weapons
+          fieldset(class=`repeating_${ability.replace(/\_/gi, '-')}-weapons`)
+            input.sheet-edit-show.sheet-trust-agent(type='text' name=`attr_${ability.replace(/\_/gi, '-')}-weapon` placeholder="Weapon")
+            input.sheet-edit-show.sheet-trust-level(type='number' name=`attr_${ability.replace(/\_/gi, '-')}-damage` placeholder="Damage")
+            .sheet-weaponing.sheet-edit-hide
+              button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-weapon} {{points=\@{${ability}_roll}}} {{weapon=@{${ability.replace(/\_/gi, '-')}-weapon}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}_roll}]]}} {{damage=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-damage}]]}}`)
+                span(name=`attr_${ability.replace(/\_/gi, '-')}-weapon`)
+              span='+'
+              input.sheet-roll-pool(type="hidden" name=`attr_${ability}_pool`)
+              select.sheet-roll-modifier(name=`attr_${ability}_roll`)
+                - let x = 0;
+                while x <= generalAbilityPoints
+                  option(class=gtClass(x) value=`${x}`)=x++
+
   .sheet-dossier
     .col
       label.sheet-trait='Academic Abilities'
@@ -139,7 +154,6 @@
       fieldset.repeating_trust
         input.sheet-edit-show.sheet-trust-agent(type='text' name='attr_trustagent' placeholder="Agent")
         input.sheet-edit-show.sheet-trust-level(type='number' name='attr_trustlevel' placeholder="Points" value="0" max="5" min="0")
-        
         .sheet-trust.sheet-edit-hide
           .sheet-attr
             span.sheet-edit-hide(name="attr_trustagent")
@@ -172,13 +186,6 @@
       fieldset.repeating_cherries
         textarea.sheet-edit-show(name="attr_cherries" type="text")
         span.sheet-edit-hide(name="attr_cherries")
-    .sheet-traitgroup
-      label.sheet-trait='Weapons'
-      fieldset.repeating_weapons
-        input.sheet-edit-show.sheet-trust-agent(type='text' name='attr_weapon' placeholder="Weapon")
-        input.sheet-edit-show.sheet-trust-level(type='number' name='attr_damage' placeholder="Damage")
-        span.sheet-edit-hide(name="attr_weapon")
-        span.sheet-edit-hide.sheet-pull-right(name="attr_damage")
     .sheet-traitgroup
       label.sheet-trait='Armor'
       select.sheet-edit-show(name="attr_armor_type")
