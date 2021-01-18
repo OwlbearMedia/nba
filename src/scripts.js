@@ -124,8 +124,8 @@ on('change:weapons_pool', (e) => {
     getSectionIDs('repeating_weapons-weapons', rowids => {
       const output = {};
       rowids.forEach(id => {
-        output[`repeating_weapons-weapons_${id}_shooting-pool`] = values['weapons_pool'];
-        output[`repeating_weapons-weapons_${id}_shooting-roll`] = 0;
+        output[`repeating_weapons-weapons_${id}_weapons-pool`] = values['weapons_pool'];
+        output[`repeating_weapons-weapons_${id}_weapons-roll`] = 0;
       });
       setAttrs(output);
     });
