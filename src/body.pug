@@ -11,7 +11,7 @@
       label.sheet-trait='Agent Name'
       input.sheet-edit-show(name="attr_character_name" type="text")
       span.sheet-edit-hide(name="attr_character_name")
-    .sheet-traitgroup.span-2
+    .sheet-traitgroup.sheet-row-span-2
       label.sheet-trait.sheet-life='Health'
       .sheet-hns-cont
         input.sheet-health(type="hidden" name=`attr_health_pool` value=setDefault('health'))
@@ -19,7 +19,7 @@
         - let i = -11;
         while i <= 18
           button(class=`hns sheet-sel-${i} ${gtClass(i)}` type="action" name=`act_health_pool_${i}`)=i++
-    .sheet-traitgroup.span-2
+    .sheet-traitgroup.sheet-row-span-2
       label.sheet-trait.sheet-stab='Stability'
       .sheet-hns-cont
         input.sheet-stability(type="hidden" name=`attr_stability_pool` value=setDefault('stability'))
