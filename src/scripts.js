@@ -176,3 +176,15 @@ on('change:hand_to_hand_roll', (e) => {
     });
   }
 });
+
+// Set correct hit threshold
+on('sheet:opened change:athletics', (e) => {
+  getAttrs(['hit-threshold', 'athletics'], (values) => {
+    let threshold = 3;
+    if (parseInt(values.athletics, 10) >= 8) threshold = 4;
+    
+    setAttrs({
+      'hit-threshold': threshold,
+    });
+  });
+});
