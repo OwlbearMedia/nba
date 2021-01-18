@@ -12,8 +12,8 @@ on('ready', () => {
       const characterAbilityMod = findObjs({ type: 'attribute', characterid: character.id, name: `${ability}_roll` })[0];
       const characterAbilityValue = parseInt(characterAbility.get('current'), 10);
 
-      characterAbility.setWithWorker('current',  characterAbilityValue - pointSpend);
-      characterAbilityMod.setWithWorker('current', 0);
+      if (characterAbility) characterAbility.setWithWorker('current',  characterAbilityValue - pointSpend);
+      if (characterAbilityMod) characterAbilityMod.setWithWorker('current', 0);
     }
   });
 });

@@ -90,6 +90,7 @@
       if (ability === 'shooting' || ability === 'weapons' || ability === 'hand_to_hand')
         .sheet-traitgroup-weapons
           fieldset(class=`repeating_${ability.replace(/\_/gi, '-')}-weapons`)
+            input(type="hidden" name="attr_is-new" value="true")
             input.sheet-edit-show.sheet-trust-agent(type='text' name=`attr_${ability.replace(/\_/gi, '-')}-weapon` placeholder="Weapon")
             input.sheet-edit-show.sheet-trust-level(type='number' name=`attr_${ability.replace(/\_/gi, '-')}-damage` placeholder="Damage")
             .sheet-weaponing.sheet-edit-hide

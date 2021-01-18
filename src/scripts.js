@@ -105,7 +105,6 @@ for (let value = 1; value <= 5; value++) {
 }
 
 // Keeping the ability pool updated for the repeating weapons sections
-
 on('change:shooting_pool', (e) => {
   getAttrs(['shooting_pool'], (values) => {
     getSectionIDs('repeating_shooting-weapons', rowids => {
@@ -124,8 +123,8 @@ on('change:weapons_pool', (e) => {
     getSectionIDs('repeating_weapons-weapons', rowids => {
       const output = {};
       rowids.forEach(id => {
-        output[`repeating_weapons-weapons_${id}_shooting-pool`] = values['weapons_pool'];
-        output[`repeating_weapons-weapons_${id}_shooting-roll`] = 0;
+        output[`repeating_weapons-weapons_${id}_weapons-pool`] = values['weapons_pool'];
+        output[`repeating_weapons-weapons_${id}_weapons-roll`] = 0;
       });
       setAttrs(output);
     });
@@ -145,8 +144,47 @@ on('change:hand_to_hand_pool', (e) => {
   });  
 });
 
-// Reseting the roll modifier for the weapoons repeating sections
+// Setting the pool correctly for new weapons
+on('change:repeating_hand-to-hand-weapons', (e) => {
+  getAttrs([`${e.triggerName}_is-new`, 'hand_to_hand_pool'], (values) => {
+    const isNew = values[`${e.triggerName}_is-new`] === 'true';
+    const output = {};
 
+    if (isNew) {
+      output[`${e.triggerName}_hand-to-hand-pool`] = values.hand_to_hand_pool;
+      output[`${e.triggerName}_is-new`] = false;
+      setAttrs(output);
+    }
+  });
+});
+
+on('change:repeating_weapons-weapons', (e) => {
+  getAttrs([`${e.triggerName}_is-new`, 'weapons_pool'], (values) => {
+    const isNew = values[`${e.triggerName}_is-new`] === 'true';
+    const output = {};
+
+    if (isNew) {
+      output[`${e.triggerName}_weapons-pool`] = values.weapons_pool;
+      output[`${e.triggerName}_is-new`] = false;
+      setAttrs(output);
+    }
+  });
+});
+
+on('change:repeating_shooting-weapons', (e) => {
+  getAttrs([`${e.triggerName}_is-new`, 'shooting_pool'], (values) => {
+    const isNew = values[`${e.triggerName}_is-new`] === 'true';
+    const output = {};
+
+    if (isNew) {
+      output[`${e.triggerName}_shooting-pool`] = values.shooting_pool;
+      output[`${e.triggerName}_is-new`] = false;
+      setAttrs(output);
+    }
+  });
+});
+
+// Reseting the roll modifier for the weapoons repeating sections
 on('change:weapons_roll', (e) => {
   if (e.newValue === '0') {
     getSectionIDs('repeating_weapons-weapons', rowids => {
