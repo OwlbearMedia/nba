@@ -103,3 +103,102 @@ for (let value = 1; value <= 5; value++) {
     });
   }); 
 }
+
+on('change:shooting_pool', (e) => {
+  getAttrs(['shooting_pool'], (values) => {
+    getSectionIDs('repeating_shooting-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => {
+        output[`repeating_shooting-weapons_${id}_shooting-pool`] = values['shooting_pool'];
+        output[`repeating_shooting-weapons_${id}_shooting-roll`] = 0;
+      });
+      setAttrs(output);
+    });
+  });
+});
+
+on('change:weapons_pool', (e) => {
+  getAttrs(['weapons_pool'], (values) => {
+    getSectionIDs('repeating_weapons-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => {
+        output[`repeating_weapons-weapons_${id}_shooting-pool`] = values['weapons_pool'];
+        output[`repeating_weapons-weapons_${id}_shooting-roll`] = 0;
+      });
+      setAttrs(output);
+    });
+  });
+});
+
+on('change:hand_to_hand_pool', (e) => {
+  getAttrs(['hand_to_hand_pool'], (values) => {
+    getSectionIDs('repeating_hand-to-hand-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => {
+        output[`repeating_hand-to-hand-weapons_${id}_hand-to-hand-pool`] = values['hand_to_hand_pool'];
+        output[`repeating_hand-to-hand-weapons_${id}_hand-to-hand-roll`] = 0;
+      });
+      setAttrs(output);
+    });
+  });  
+});
+
+////////
+
+on('change:shooting_roll', (e) => {
+  getSectionIDs('repeating_shooting-weapons', rowids => {
+    const output = {};
+    rowids.forEach(id => output[`repeating_shooting-weapons_${id}_shooting-pool`] = e.newValue);
+    setAttrs(output);
+  });
+});
+
+on('change:weapons_roll', (e) => {
+  getSectionIDs('repeating_weapons-weapons', rowids => {
+    const output = {};
+    rowids.forEach(id => output[`repeating_weapons-weapons_${id}_weapons-pool`] = e.newValue);
+    setAttrs(output);
+  });
+});
+
+on('change:hand_to_hand_roll', (e) => {
+  if (e.newValue === '0') {
+    getSectionIDs('repeating_hand-to-hand-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => output[`repeating_hand-to-hand-weapons_${id}_hand-to-hand-pool`] = e.newValue);
+      setAttrs(output);
+    });
+  }
+});
+
+////////
+
+on('change:weapons_roll', (e) => {
+  if (e.newValue === '0') {
+    getSectionIDs('repeating_weapons-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => output[`repeating_weapons-weapons_${id}_weapons-roll`] = e.newValue);
+      setAttrs(output);
+    });
+  }
+});
+
+on('change:shooting_roll', (e) => {
+  if (e.newValue === '0') {
+    getSectionIDs('repeating_shooting-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => output[`repeating_shooting-weapons_${id}_shooting-roll`] = e.newValue);
+      setAttrs(output);
+    });
+  }
+});
+
+on('change:hand_to_hand_roll', (e) => {
+  if (e.newValue === '0') {
+    getSectionIDs('repeating_hand-to-hand-weapons', rowids => {
+      const output = {};
+      rowids.forEach(id => output[`repeating_hand-to-hand-weapons_${id}_hand-to-hand-roll`] = e.newValue);
+      setAttrs(output);
+    });
+  }
+});

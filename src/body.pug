@@ -81,11 +81,11 @@
             input.sheet-edit-show.sheet-trust-agent(type='text' name=`attr_${ability.replace(/\_/gi, '-')}-weapon` placeholder="Weapon")
             input.sheet-edit-show.sheet-trust-level(type='number' name=`attr_${ability.replace(/\_/gi, '-')}-damage` placeholder="Damage")
             .sheet-weaponing.sheet-edit-hide
-              button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-weapon} {{points=\@{${ability}_roll}}} {{weapon=@{${ability.replace(/\_/gi, '-')}-weapon}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}_roll}]]}} {{damage=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-damage}]]}}`)
+              button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-weapon} {{points=\@{${ability.replace(/\_/gi, '-')}-roll}}} {{weapon=@{${ability.replace(/\_/gi, '-')}-weapon}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-roll}]]}} {{damage=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-damage}]]}}`)
                 span(name=`attr_${ability.replace(/\_/gi, '-')}-weapon`)
               span='+'
-              input.sheet-roll-pool(type="hidden" name=`attr_${ability}_pool`)
-              select.sheet-roll-modifier(name=`attr_${ability}_roll`)
+              input.sheet-roll-pool(type="hidden" name=`attr_${ability.replace(/\_/gi, '-')}-pool`)
+              select.sheet-roll-modifier(name=`attr_${ability.replace(/\_/gi, '-')}-roll`)
                 - let x = 0;
                 while x <= generalAbilityPoints
                   option(class=gtClass(x) value=`${x}`)=x++
@@ -213,3 +213,7 @@
       fieldset.repeating_languages
         input.sheet-edit-show.sheet-repeating(type='text' name='attr_language')
         span.sheet-edit-hide(name="attr_language")
+    .sheet-traitgroup.sheet-col-span-2
+      label.sheet-trait='Notes'
+      textarea.sheet-edit-show(name="attr_notes" type="text")
+      span.sheet-edit-hide(name="attr_notes")

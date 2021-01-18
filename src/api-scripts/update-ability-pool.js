@@ -9,9 +9,11 @@ on('ready', () => {
       // getting character info
       const character = findObjs({ type: 'character', name })[0];
       const characterAbility = findObjs({ type: 'attribute', characterid: character.id, name: `${ability}_pool` })[0];
+      const characterAbilityMod = findObjs({ type: 'attribute', characterid: character.id, name: `${ability}_roll` })[0];
       const characterAbilityValue = parseInt(characterAbility.get('current'), 10);
 
-      characterAbility.set('current',  characterAbilityValue - pointSpend);
+      characterAbility.setWithWorker('current',  characterAbilityValue - pointSpend);
+      characterAbilityMod.setWithWorker('current', 0);
     }
   });
 });

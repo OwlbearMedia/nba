@@ -71,8 +71,11 @@ h1 {
   /* row-gap: 14px; */
   margin-bottom: 14px;
 }
-.sheet-dossier .sheet-span-2 {
+.sheet-dossier .sheet-row-span-2 {
   grid-row: span 2;
+}
+.sheet-dossier .sheet-col-span-2 {
+  grid-column: span 2;
 }
 
 .sheet-general-abilities button[type=roll].sheet-blank-roll-button {
