@@ -226,3 +226,62 @@ on('sheet:opened change:athletics', (e) => {
     });
   });
 });
+
+on('change:repeating_cover-id:cover-points', (e) => {
+  getAttrs([e.triggerName.replace('cover-points', 'is-new'), 'cover'], (values) => {
+    const isNew = values[e.triggerName.replace('cover-points', 'is-new')] === 'true';
+    const output = {};
+    const newValue = parseInt(e.newValue, 10);
+    const previousValue = parseInt(e.previousValue, 10);
+    const diff = isNew ? newValue :  newValue - previousValue;
+
+    if (diff > 0) {
+      output.cover = parseInt(values['cover'], 10) - diff;
+      output[e.triggerName.replace('cover-points', 'is-new')] = false;
+
+      setAttrs(output);
+    }
+  });
+});
+
+on('change:repeating_network-id:network-points', (e) => {
+  getAttrs([e.triggerName.replace('network-points', 'is-new'), 'network'], (values) => {
+    const isNew = values[e.triggerName.replace('network-points', 'is-new')] === 'true';
+    const output = {};
+    const newValue = parseInt(e.newValue, 10);
+    const previousValue = parseInt(e.previousValue, 10);
+    const diff = isNew ? newValue :  newValue - previousValue;
+
+    if (diff > 0) {
+      output.network = parseInt(values['network'], 10) - diff;
+      output[e.triggerName.replace('network-points', 'is-new')] = false;
+
+      setAttrs(output);
+    }
+  });
+});
+
+// This is dumb but this is apparently how I can get the row id in a roll template
+on('change:repeating_cover-id', (e) => {
+  getAttrs([`${e.triggerName}_cover-pool`, 'cover_pool'], (values) => {
+    const output = {};
+
+    if (values.cover_pool !== values[`${e.triggerName}_cover-pool`]) {
+      output[`${e.triggerName}_cover-pool`] = values.cover_pool;
+      output[`${e.triggerName}_row-id`] = e.triggerName.replace('repeating_cover-id_', '')
+      setAttrs(output);
+    }
+  });
+});
+
+on('change:repeating_network-id', (e) => {
+  getAttrs([`${e.triggerName}_network-pool`, 'network_pool'], (values) => {
+    const output = {};
+
+    if (values.network_pool !== values[`${e.triggerName}_network-pool`]) {
+      output[`${e.triggerName}_network-pool`] = values.network_pool;
+      output[`${e.triggerName}_row-id`] = e.triggerName.replace('repeating_network-id_', '')
+      setAttrs(output);
+    }
+  });
+});

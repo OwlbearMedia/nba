@@ -91,8 +91,8 @@
         .sheet-traitgroup-weapons
           fieldset(class=`repeating_${ability.replace(/\_/gi, '-')}-weapons`)
             input(type="hidden" name="attr_is-new" value="true")
-            input.sheet-edit-show.sheet-trust-agent(type='text' name=`attr_${ability.replace(/\_/gi, '-')}-weapon` placeholder="Weapon")
-            input.sheet-edit-show.sheet-trust-level(type='number' name=`attr_${ability.replace(/\_/gi, '-')}-damage` placeholder="Damage")
+            input.sheet-edit-show(type='text' name=`attr_${ability.replace(/\_/gi, '-')}-weapon` placeholder="Weapon")
+            input.sheet-edit-show(type='number' name=`attr_${ability.replace(/\_/gi, '-')}-damage` placeholder="Damage")
             .sheet-weaponing.sheet-edit-hide
               button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-weapon} {{points=\@{${ability.replace(/\_/gi, '-')}-roll}}} {{weapon=@{${ability.replace(/\_/gi, '-')}-weapon}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-roll}]]}} {{damage=[[1d6 + \@{${ability.replace(/\_/gi, '-')}-damage}]]}}`)
                 span(name=`attr_${ability.replace(/\_/gi, '-')}-weapon`)
@@ -102,6 +102,37 @@
                 - let x = 0;
                 while x <= generalAbilityPoints
                   option(class=gtClass(x) value=`${x}`)=x++
+      if (ability === 'cover' || ability === 'network')
+        .sheet-traitgroup-weapons
+          fieldset(class=`repeating_${ability}-id`)
+            input(type="hidden" name="attr_is-new" value="true")
+            input(type="hidden" name="attr_row-id" value="")
+            input.sheet-edit-show.sheet-cn-name(type='text' name=`attr_${ability}-name` placeholder="Name")
+            input.sheet-edit-show.sheet-cn-desc(type='text' name=`attr_${ability}-desc` placeholder="Description")
+            input.sheet-edit-show.sheet-roll-pool(type="hidden" name=`attr_${ability}-pool`)
+            select.sheet-edit-show.sheet-roll-modifier(name=`attr_${ability}-points`)
+              - let x = 0;
+              while x <= generalAbilityPoints
+                option(class=gtClass(x) value=`${x}`)=x++
+            .sheet-weaponing.sheet-edit-hide
+              .sheet-attr
+                button.blank-roll-button(type='roll' name=`roll_${ability}` value=`\&{template:nba-cover} {{rowId=@{row-id}}} {{identity=@{${ability}-name}}} {{points=\@{${ability}-id-roll}}} {{name=@{character_name}}} {{ability=${ability}}} {{rname=${readable(ability)}}} {{result=[[1d6 + \@{${ability}-id-roll}]]}}`)
+                  span(name=`attr_${ability}-name`)
+                span='+'
+                input.sheet-roll-pool(type="hidden" name=`attr_${ability}-points`)
+                select.sheet-roll-modifier(name=`attr_${ability}-id-roll`)
+                  - let f = 0;
+                  while f <= generalAbilityPoints
+                    option(class=gtClass(f) value=`${f}`)=f++
+              .sheet-dots.sheet-edit-hide
+                input.sheet-dot-max(type="hidden" name=`attr_${ability}-points`)
+                - let j = 1;
+                while j <= generalAbilityPoints
+                  button(class=`dot ${gtClass(j)}` type="action" name=`act_${ability}-id-pool-${j}`)
+                    span.sheet-checked
+                    - j++;
+              div.sheet-display-desc
+                span(name=`attr_${ability}-desc`)
 
   .sheet-dossier
     .col
@@ -155,14 +186,6 @@
 
   .sheet-dossier
     .sheet-traitgroup
-      label.sheet-trait='Covers'
-      textarea.sheet-edit-show(name="attr_covers" type="text")
-      span.sheet-edit-hide(name="attr_covers")
-    .sheet-traitgroup
-      label.sheet-trait='Network Contacts'
-      textarea.sheet-edit-show(name="attr_contacts" type="text")
-      span.sheet-edit-hide(name="attr_contacts")
-    .sheet-traitgroup
       label.sheet-trait='Trust'
       fieldset.repeating_trust
         input.sheet-edit-show.sheet-trust-agent(type='text' name='attr_trustagent' placeholder="Agent")
@@ -197,7 +220,7 @@
     .sheet-traitgroup
       label.sheet-trait='Cherries'
       fieldset.repeating_cherries
-        textarea.sheet-edit-show(name="attr_cherries" type="text")
+        input.sheet-edit-show(name="attr_cherries" type="text")
         span.sheet-edit-hide(name="attr_cherries")
     .sheet-traitgroup
       label.sheet-trait='Languages'
@@ -213,7 +236,8 @@
       label.sheet-trait='Background'
       input.sheet-edit-show(name="attr_background" type="text")
       span.sheet-edit-hide(name="attr_background")
-    .sheet-traitgroup.sheet-col-span-2
+    .sheet-traitgroup
       label.sheet-trait='Notes'
-      textarea.sheet-edit-show(name="attr_notes" type="text")
-      span.sheet-edit-hide(name="attr_notes")
+      fieldset.repeating_notes
+        input.sheet-edit-show.sheet-repeating(type='text' name='attr_note')
+        span.sheet-edit-hide(name="attr_note")
