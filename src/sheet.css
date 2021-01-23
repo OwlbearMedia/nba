@@ -823,12 +823,22 @@ input.sheet-health-max[value="20"] ~ button.sheet-gt-20 {
   margin-bottom: 8px;
 }
 
+.sheet-cn-desc {
+  width: 300px;
+}
+
+.sheet-display-desc {
+  margin-top: 6px;
+}
+
 .sheet-rolltemplate-nba .sheet-template-container,
+.sheet-rolltemplate-nba-cover .sheet-template-container,
 .sheet-rolltemplate-nba-weapon .sheet-template-container {
   border: 1px solid black;
 }
 
 .sheet-rolltemplate-nba .sheet-template-header,
+.sheet-rolltemplate-nba-cover .sheet-template-header,
 .sheet-rolltemplate-nba-weapon .sheet-template-header {
   padding: 8px;
   border-bottom: 1px solid black;
@@ -838,24 +848,28 @@ input.sheet-health-max[value="20"] ~ button.sheet-gt-20 {
 }
 
 .sheet-rolltemplate-nba .sheet-template-body,
+.sheet-rolltemplate-nba-cover .sheet-template-body,
 .sheet-rolltemplate-nba-weapon .sheet-template-body {
   background: floralwhite;
   padding: 8px;
 }
 
 .sheet-rolltemplate-nba .sheet-template-row,
+.sheet-rolltemplate-nba-cover .sheet-template-row,
 .sheet-rolltemplate-nba-weapon .sheet-template-row {
   font-size: 16px;
   padding-bottom: 8px;
 }
 
 .sheet-rolltemplate-nba .sheet-template-points,
+.sheet-rolltemplate-nba-cover .sheet-template-points,
 .sheet-rolltemplate-nba-weapon .sheet-template-points {
   color: darkgrey;
   font-size: 12px;
 }
 
 .sheet-rolltemplate-nba .inlinerollresult,
+.sheet-rolltemplate-nba-cover .inlinerollresult,
 .sheet-rolltemplate-nba-weapon .inlinerollresult {
   background: floralwhite;
   border: none;

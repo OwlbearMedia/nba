@@ -6,9 +6,12 @@ on('ready', () => {
       const pointSpend = parseInt(msg.content.match(/{points=.+?(?=})/)[0].split('=')[1], 10);
       const ability = msg.content.match(/{ability=.+?(?=})/)[0].split('=')[1].replace('-a', '').replace('^{', '');
       const name = msg.content.match(/{name=.+?(?=})/)[0].split('=')[1];
+      const rowId = msg.content.match(/{rowId=.+?(?=})/)[0].split('=')[1];
+      
       // getting character info
+      const characterAbilityName = rowId ? `repeating_${ability}-id_${rowId}_${ability}-points` : `${ability}_pool`;
       const character = findObjs({ type: 'character', name })[0];
-      const characterAbility = findObjs({ type: 'attribute', characterid: character.id, name: `${ability}_pool` })[0];
+      const characterAbility = findObjs({ type: 'attribute', characterid: character.id, name: characterAbilityName }, { caseInsensitive: true })[0];
       const characterAbilityMod = findObjs({ type: 'attribute', characterid: character.id, name: `${ability}_roll` })[0];
       const characterAbilityValue = parseInt(characterAbility.get('current'), 10);
 
